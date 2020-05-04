@@ -17,19 +17,22 @@ class Form extends Component {
   }
 
   render() {
-    return (
-      <form action="" onSubmit={(e)=>
-      {this.props.handleSubmit(e, this.state.userInput)
-      this.setState({
-        userInput: "",
-      })}
-      }>
-        <input type="text" value={this.state.userInput} onChange={this.handleUinput} placeholder="lion, france, sun"></input>
-        <button type="submit">Take a Look</button>
-      </form>
-    )
+      return (
+        <form action="" onSubmit={(e) => {
+          this.props.handleSubmit(e, this.state.userInput)
+          this.setState({
+            userInput: "",
+          })
+        }
+        }>
+          <label htmlFor="searchArt" className="sr-only">Input query here</label>
+          <input type="text" id="searchArt" value={this.state.userInput} onChange={this.handleUinput} placeholder="eg: lion, france, sun"></input>
+          <button type="submit">Take a Look</button>
+        </form>
+      )
+    }
   }
-}
+
 
 
 export default Form;

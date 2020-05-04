@@ -1,38 +1,264 @@
-/* .App {
+/* HEADER  */
+header{
+  background-color: #2D3142;
+  min-height: 70vh;
+}
+
+h1{
+  font-family: 'Shrikhand', cursive;
+  font-size: 4.8rem;
+  padding-top: 23vh;
+  padding-bottom: 5vh; 
+  text-shadow: 2px 2px 0px #EF8354;
+}
+
+header p{
+  max-width: 700px;
+  padding: 0  30px 10vh 30px;
+  color: #C4C5C5;
+  font-size: 1.5rem;
+}
+
+
+/* SEARCH SECTION  */
+.search{
+  background-color: #445164;
+  min-height: 30vh;
+}
+
+form{
+  padding-top: 8vh;
+  text-align:center;
+  font-size: 2rem;
+}
+
+form > *{
+  border-bottom: 1px solid #FFFFFF;
+  color: #C4C5C5;
+  padding-top: 20px;
+  max-width: 280px;
+}
+
+.search button{
+  margin-left: 3vw;
+}
+
+.search button:hover, .search button:focus{
+  color: #EF8354;
+  border-bottom: 1px solid #EF8354;
+}
+
+
+/* RESULTS SECTION  */
+.results{
+  background-color: #2D3142;
+  min-height: 20vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+
+ul{
+  columns: 5 300px;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+}
+
+img{
+  width: 100%;
+}
+
+li{
+  display: grid;
+  width: 100%;
+  padding-bottom: 15px;
+}
+
+.pic, .picInfo{
+  grid-area: 1/1;
+}
+
+.picInfo{
+  padding: 3px;
+  position:relative;
+  opacity: 0;
+}
+
+.picInfo:hover, .picInfo:focus{
+  opacity: 1;
+}
+
+.results span{
+  background: #EF8354;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+.results h2{
+  margin-bottom: 5px; 
+}
+
+.results h2 span{
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.tryagain{
+  text-align: center;  
+  font-size: 1.5rem;
+  padding-top: 3vh;
+  color:#C4C5C5;
+}
+
+/* heart shape adapted from: https://codepen.io/tari/pen/dGxqWz */
+.results input{
+  position: absolute;
+  bottom: 15px;
+  right: 2px;
+  appearance: none;
+	width: 20px;
+	height: 20px;
+  margin: 0 10px;
+	outline: 10px solid #a65a38;
+	outline-offset: -10px;
+	cursor: pointer;
+	backface-visibility: hidden;
+	border-radius: 50%;
+	transform: rotate(45deg) scale(1);
+	box-shadow:	0 -10px 0 0 #a65a38,	-10px 0 0 0 #a65a38;
+  outline-color: #a65a38;
+  opacity: 1;
+}
+
+.results input:checked{
+  outline: 10px solid #EF8354;
+  box-shadow:	0 -10px 0 0 #EF8354,	-10px 0 0 0 #EF8354;
+  outline-color: #EF8354;
+  transform: rotate(45deg) scale(1.2);
+}
+
+
+
+
+/* WHERE SECTION  */
+.where{
+  background-color: #EF8354; 
+}
+
+.where > div:nth-child(1) > p:nth-child(1){
+  min-height: 32vh;
+  text-align: center;
+  font-size: 3rem;
+  font-family:'Shrikhand', cursive;
+  padding-top: 12vh;
+  padding-bottom: 10vh;
+  text-shadow: 2px 2px 0px #445164;
+}
+
+.pics{
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.city{
+  width: 50vw;
+  min-width: 300px;
+  display: inline-block;
+  min-height: 65vh;
+  position: relative;
+  text-align: center;
+  margin-bottom: -20px;
+}
+
+.city div{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.searchAgain{
+  background:#445164;
+  height: 20vh;
+  padding-top: 7vh;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.searchAgain a{
+  color: #C4C5C5;
+  border-bottom: 1px solid white;
+}
+
+.searchAgain a:hover, .searchAgain a:focus{
+  color: #EF8354;
+  border-bottom: 1px solid #EF8354;
+}
+
+.cA{
+  background: linear-gradient( #445164c9,#445164c9),url(./assets/rijkmuseum.JPG);
+  background-size: cover;
+  background-position:center;
+}
+
+.cB{
+  background: linear-gradient( #445164c9,#445164c9),url(./assets/harvard.jpg);
+  background-size: cover;
+  background-position:center;
+}
+
+
+/* FOOTER */
+footer{
+  padding-top: 15px;
+  padding-bottom: 5px;
+  color: #C4C5C5;
+  background: #2D3142;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+footer a{
+  color: #C4C5C5;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+
+/* MEDIA QUERIES  */
+
+@media(max-width:600px){
+  h1{
+    padding-top: 15vh;
+    font-size: 4rem;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  header p{
+    font-size: 1.4rem;
+    padding: 0;
+    padding: 0  30px 10vh 0;
   }
-  to {
-    transform: rotate(360deg);
+  form, .searchAgain{
+    font-size: 1.8rem;
   }
-} */
+  .city{
+    width: 100vw;
+  }
+  .where > div:nth-child(1) > p:nth-child(1){
+    font-size: 2.2rem; 
+  }
+
+}
+
+
+
+
+
+/* 
+#2D3142
+/* #BFC0C0 */
+/* #C4C5C5
+#FFFFFF
+#EF8354 */
+/* #4F5D75 */
+/* #445164 */ 
+/* #a65a38 */
+
+
+/* font-family: 'Shrikhand', cursive;
+font-family: 'Roboto', sans-serif; */

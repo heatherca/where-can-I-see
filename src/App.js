@@ -3,7 +3,6 @@ import axios from 'axios';
 import WhichCity from './Whichcity.js';
 import Results from './Results.js';
 import Form from './Form.js';
-import test from './assets/narwhals.jpg'
 import './App.css';
 
 
@@ -12,12 +11,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      userInput:"",
       amsterdam: 0,
       boston: 0,
       bostonli:[],
       amsterdamli:[],
-      shuffleli:[],
-      // userInput: "",
+      shuffleli:[]
     }
   }
     // The things that happen when a user clicks submit
@@ -33,9 +32,9 @@ class App extends Component {
           hasimage: 1,
           sort: "random",
           person: "any",
-          primaryimageul: true,
-          keyword: searchthis,
+          title: searchthis,
           q: "imagepermissionlevel:0",
+          
         }
       }).then((result) => {
       // Data (array of objects) from boston call are mapped into lis and then added to a new array
@@ -43,19 +42,23 @@ class App extends Component {
        const bostonlis = boston.map((bart) => {
           return (
             <li key={bart.id} className="boston">
-              <h2>{bart.title}</h2>
-              <p>{bart.people[0].name}</p>
-              <label htmlFor="likedart">That's nice</label>
-              <input type="checkbox" id="likedart" className="boston" onChange={this.handleCheck}></input>
-              <img src={bart.primaryimageurl} alt={bart.title} />
+              <div className="pic">
+                <img src={bart.primaryimageurl} alt={bart.title} />
+              </div>
+              <div className="picInfo" tabIndex="0">
+                <h2><span>{bart.title}</span></h2>
+                <p><span>{bart.people[0].name}</span></p>
+                <label htmlFor={bart.id} className="hideme" >Check to like art</label>
+                <input type="checkbox" id={bart.id} className="boston" onChange={this.handleCheck} ></input>
+              </div>
             </li>
           )
         })
         this.setState({
-          bostonli: bostonlis
+          bostonli: bostonlis,
+          userInput: searchthis
         })
 
-      // console.log(this.state.bostonli)
       })
       // The api call for amsterdam 
       axios({
@@ -65,20 +68,25 @@ class App extends Component {
         params: {
           key: `dF0gsdz1`,
           imgonly: true,
-          q: searchthis
+          s: "relevance",
+          q: "title:" + searchthis,
         }
         
       }).then((response) => {
-        // Data (array of objects) from amsterdam call are mapped into lis and then added to a new array
+        // Data (array of objects) from amsterdam call are mapped into lis and then added to a new array className="sr-only"
         const amsterdam = response.data.artObjects;
         const amsterdamlis = amsterdam.map((aart) => {
           return (
             <li key={aart.id} className="amsterdam">
-              <h2>{aart.title}</h2>
-              <p>{aart.principalOrFirstMaker}</p>
-              <label htmlFor="likedart">That's nice</label>
-              <input type="checkbox" id="likedart" className="amsterdam" onChange={this.handleCheck}></input>
-              <img src={aart.webImage.url} alt={aart.title} />
+              <div className="pic">
+                <img src={aart.webImage.url} alt={aart.title} />
+              </div>
+              <div className="picInfo" tabIndex="0">
+                <h2><span>{aart.title}</span></h2>
+                <p><span>{aart.principalOrFirstMaker}</span></p>
+                <label htmlFor={aart.id} className="sr-only">Check to like art</label>
+                <input type="checkbox" id={aart.id} className="amsterdam" onChange={this.handleCheck} tabIndex="0"></input>
+              </div>
             </li>
           )
         })
@@ -89,24 +97,13 @@ class App extends Component {
           const shuffleli= this.shuffleArray([...this.state.amsterdamli, ...this.state.bostonli])
           this.setState({shuffleli})
         })
-        // console.log(this.state.mixedli);
       })
-    // clears input field 
+    // clears city counts
     this.setState({
       amsterdam: 0,
       boston: 0
-    })
-    
+    })   
   }
-
-  // takes text input and passes it to state also clears city counts once user starts typing something new 
-  // handleUinput = (event) => {
-  //   this.setState({
-  //     userInput: event.target.value,
-  //     amsterdam: 0,
-  //     boston: 0
-  //   })
-  // }
 
   // function used to produce shuffled array of lis
   shuffleArray = (array) => {
@@ -135,40 +132,68 @@ handleCheck = (event) =>{
   })
 }
 
-
-
+// render 
   render() {
     return (
       <div className="App">
-        <h1>Where should I see...?</h1>
-        <p>Input a query and then check which items you are drawn to. At the end see which city you should jet off to next.</p>
-        {/* <form action="" onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.userInput} onChange={this.handleUinput} placeholder="lion, france, sun"></input>
-          <button type="submit">Take a Look</button>
-        </form> */}
-        <Form handleSubmit={this.handleSubmit} />
-        <section>
-          <p> You should visit: 
-          <WhichCity amsterdam={this.state.amsterdam} boston={this.state.boston}/>
-          </p>
-        </section>
-        <section>
-          <img src={test} alt="a test image"/>
-          <p>Amsterdam:{this.state.amsterdam}</p>
-          <p>Boston:{this.state.boston}</p>
-        </section>
-        <section>
-          <Results shuffled={this.state.shuffleli}/>
-        </section>
-        
+        {/* header  */}
+        <header>
+          <div className="wrapper">
+            <h1 id="#top">Where can I see...?</h1>
+            <p>Input a query and then heart which items you are drawn to. At the end see if Amsterdam or Boston is the city for you. </p>
+          </div>
+        </header>
+        <main>
+          {/* search section  */}
+          <section className="search">
+            <div className="wrapper">
+              <Form handleSubmit={this.handleSubmit} />
+            </div>
+          </section>
+          {/* results section  */}
+          <section className="results">
+            <div className="wrapper">
+              <Results shuffled={this.state.shuffleli} countme={this.state.userInput}/>
+            </div>
+          </section>
+          {/* where section  */}
+          <section className="where">
+            <div className="wrapper">
+              <p> You should visit: 
+              <WhichCity amsterdam={this.state.amsterdam} boston={this.state.boston}/>
+              </p>
+            </div>
+            <div className="pics">
+              <div className="city cA">
+                <div>
+                  <a href="https://www.rijksmuseum.nl/en">Rijksmuseum</a>
+                <p>{this.state.amsterdam}</p>
+                </div>
+              </div>
+              <div className="city cB">
+                <div>
+                  <a href="https://www.harvardartmuseums.org/">Harvard Art Museums</a>
+                  <p>{this.state.boston}</p>
+                </div>
+              </div>
+            </div>
+            {/* search again section  */}
+            <div className="searchAgain">
+              <div className="wrapper">
+                <a href="#top">Search Again</a>
+              </div>
+            </div>
+          </section>
+        </main>
+        {/* footer  */}
+        <footer>
+          <div className="wrapper">
+            <p>Made By: <a href="http://www.heatherandreadis.com/">Heather Andreadis</a> with data from <a href="https://github.com/harvardartmuseums/api-docs">Harvard Art Museums API</a> and <a href="https://data.rijksmuseum.nl/object-metadata/api/">RijksData API</a></p>
+          <p></p>
+          </div>
+        </footer>
       </div>
     );
   }
 }
 export default App;
-
-
-
-// When checkbox is checked add 1 to boston or amsterdam
-// count number of checked buttons/lis with class of boston and class of amsterdam 
-// display numbers on page 
