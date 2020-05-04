@@ -48,7 +48,7 @@ class App extends Component {
               <div className="picInfo" tabIndex="0">
                 <h2><span>{bart.title}</span></h2>
                 <p><span>{bart.people[0].name}</span></p>
-                <label htmlFor={bart.id} className="hideme" >Check to like art</label>
+                <label htmlFor={bart.id} className="sr-only">Check to like art</label>
                 <input type="checkbox" id={bart.id} className="boston" onChange={this.handleCheck} ></input>
               </div>
             </li>
@@ -73,7 +73,7 @@ class App extends Component {
         }
         
       }).then((response) => {
-        // Data (array of objects) from amsterdam call are mapped into lis and then added to a new array className="sr-only"
+        // Data (array of objects) from amsterdam call are mapped into lis and then added to a new array
         const amsterdam = response.data.artObjects;
         const amsterdamlis = amsterdam.map((aart) => {
           return (
@@ -140,7 +140,7 @@ handleCheck = (event) =>{
         <header>
           <div className="wrapper">
             <h1 id="#top">Where can I see...?</h1>
-            <p>Input a query and then heart which items you are drawn to. At the end see if Amsterdam or Boston is the city for you. </p>
+            <p>Input a query and browse through the results. Hover or tap over each piece to find out more and heart which items you are drawn to. At the end see if Amsterdam or Boston is the city for you. </p>
           </div>
         </header>
         <main>

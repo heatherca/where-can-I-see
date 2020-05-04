@@ -28,6 +28,7 @@ header p{
 
 form{
   padding-top: 8vh;
+  padding-bottom: 3vh;
   text-align:center;
   font-size: 2rem;
 }
@@ -137,8 +138,6 @@ li{
 }
 
 
-
-
 /* WHERE SECTION  */
 .where{
   background-color: #EF8354; 
@@ -222,10 +221,9 @@ footer a{
 
 
 /* MEDIA QUERIES  */
-
 @media(max-width:600px){
   h1{
-    padding-top: 15vh;
+    padding-top: 10vh;
     font-size: 4rem;
   }
   header p{
@@ -248,14 +246,12 @@ footer a{
 
 
 
+/* COLORS AND FONTS  */
 
-/* 
-#2D3142
-/* #BFC0C0 */
-/* #C4C5C5
-#FFFFFF
-#EF8354 */
-/* #4F5D75 */
+/* #2D3142 */
+/* #C4C5C5 */
+/* #FFFFFF */
+/* #EF8354 */ 
 /* #445164 */ 
 /* #a65a38 */
 
